@@ -1,4 +1,4 @@
-import {createVideo} from "../video/video_creation";
+const createVideo = require("../video/video_creation")
 
 const path = require("path");
 const express = require("express");
