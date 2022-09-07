@@ -1,0 +1,27 @@
+{
+  "name": "video-creation-react-nodejs-ts",
+  "version": "1.0.0",
+  "description": "Create video by imgs",
+  "main": "backend/server/index.ts",
+  "scripts": {
+    "start": "node backend/server/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/workbzw/video-creation-react-nodejs-ts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/workbzw/video-creation-react-nodejs-ts/issues"
+  },
+  "homepage": "https://github.com/workbzw/video-creation-react-nodejs-ts#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "ffcreator": "^6.7.5"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.15"
+  }
+}
