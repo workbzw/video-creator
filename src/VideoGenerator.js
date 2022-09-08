@@ -1,5 +1,3 @@
-import {Utils} from "../Utils";
-
 const {FFScene, FFText, FFVideo, FFAlbum, FFImage, FFCreator} = require("ffcreator");
 const path = require('path');
 const colors = require('colors');
@@ -9,15 +7,12 @@ const canvasWidth = 360;
 const canvasHeight = 640;
 const totalTime = 16;
 
-interface Callback {
-    (filePath:string):void
-}
-export function createVideo(callback:Callback) {
-    const videoName = Date.parse(new Date().toString()).toString() + Utils.random(10000)
+exports.createVideo = (callback,imgUrl) => {
+    const videoName = Date.parse(new Date().toString()).toString() + Math.floor(Math.random() * 99999999);
     console.log(videoName)
     const imgArray = [
-        {path: path.join(__dirname, "imgs/img.png"), eff: "zoomingIn", x: 180, y: 320, w: canvasWidth, h: 200},
-        {path: path.join(__dirname, "imgs/img_1.png"), eff: "zoomingIn", x: 180, y: 320, w: canvasWidth, h: 200},
+        {path: imgUrl, eff: "zoomingIn", x: 180, y: 320, w: canvasWidth, h: 200},
+        {path: imgUrl, eff: "zoomingIn", x: 180, y: 320, w: canvasWidth, h: 200},
         {path: path.join(__dirname, "imgs/img_2.png"), eff: "zoomingIn", x: 180, y: 320, w: canvasWidth, h: 200},
         {path: path.join(__dirname, "imgs/img_3.png"), eff: "zoomingIn", x: 180, y: 320, w: canvasWidth, h: 200}]
 
@@ -44,7 +39,7 @@ export function createVideo(callback:Callback) {
             width: img.w,
             height: img.h
         });
-        image.addEffect("rotateIn", i == 0 ? 0 : 1, i * everyOneTime);
+        image.addEffect("rotateIn", i === 0 ? 0 : 1, i * everyOneTime);
         image.addEffect("fadeOut", 1, (i + 1) * everyOneTime);
         scene.addChild(image);
     }
@@ -60,7 +55,7 @@ export function createVideo(callback:Callback) {
     scene.addChild(text);
 
     creator.output(path.join(__dirname, "output/" + videoName + ".mp4"));
-    creator.start().then(r => {
+    creator.start().then(() => {
         console.log("开始")
     });        // 开始加工
     creator.closeLog();     // 关闭log(包含perf)
@@ -68,13 +63,13 @@ export function createVideo(callback:Callback) {
     creator.on('start', () => {
         console.log(`FFCreator start`);
     });
-    creator.on('error', e => {
+    creator.on('error', (e) => {
         console.log(`FFCreator error: ${JSON.stringify(e)}`);
     });
-    creator.on('progress', e => {
+    creator.on('progress', (e) => {
         console.log(colors.yellow(`FFCreator progress: ${e.state} ${(e.percent * 100) >> 0}%`));
     });
-    creator.on('complete', e => {
+    creator.on('complete', (e) => {
         callback(videoName)
         console.log(colors.magenta(`FFCreator completed: \n USEAGE: ${e.useage} \n PATH: ${e.output} `));
     });
