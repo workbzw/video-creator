@@ -11,7 +11,7 @@ exports.createVideo = (callback,imgUrl) => {
     const videoName = Date.parse(new Date().toString()).toString() + Math.floor(Math.random() * 99999999);
     console.log(videoName)
     const imgArray = [
-        {path: path.join(__dirname, "imgs/img.png"), eff: "zoomingIn", x: 180, y: 320, w: canvasWidth, h: 200},
+        {path: imgUrl, eff: "zoomingIn", x: 180, y: 320, w: canvasWidth, h: 200},
         {path: path.join(__dirname, "imgs/img_1.png"), eff: "zoomingIn", x: 180, y: 320, w: canvasWidth, h: 200},
         {path: path.join(__dirname, "imgs/img_2.png"), eff: "zoomingIn", x: 180, y: 320, w: canvasWidth, h: 200},
         {path: path.join(__dirname, "imgs/img_3.png"), eff: "zoomingIn", x: 180, y: 320, w: canvasWidth, h: 200}]
