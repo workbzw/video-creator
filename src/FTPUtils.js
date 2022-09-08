@@ -121,7 +121,7 @@ async function uploadFile(filepath,remoteFileName) {
 async function downloadFile(filePath,res){
     const dirPath = path.dirname(filePath);
     const fileName = path.basename(filePath);
-    let {err : ea,dir} = await cwd(dirPath);
+    // let {err : ea,dir} = await cwd(dirPath);
     return new Promise((resolve,reject)=>{
         ftp.get(fileName,(err,rs)=>{
             let ws = fs.createWriteStream(fileName).pipe(res);

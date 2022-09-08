@@ -21,14 +21,15 @@ app.get("/video/create", (req, res) => {
 });
 app.get("/video/get", (req, res) => {
     const videoUrl = req.query.url.toString();
-    downloadFile(videoUrl,res).then(r => {
-        console.log(r)
         let filePath = path.join(__dirname, "/www/wwwroot/video/" + videoUrl);
-        res.download(filePath);
-    }).catch(err=>{
-        console.log(err)
-        res.send("下载失败:"+err+new Date().getTime().toString())
-    });
+        res.download(filePath)
+    // downloadFile(videoUrl,res).then(r => {
+    //     console.log(r)
+    //     res.download(filePath);
+    // }).catch(err=>{
+    //     console.log(err)
+    //     res.send("下载失败:"+err+new Date().getTime().toString())
+    // });
 });
 
 app.listen("3000", () => {
