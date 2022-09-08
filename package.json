@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/workbzw/video-creation-react-nodejs-ts#readme",
   "dependencies": {
+    "colors": "^1.4.0",
     "express": "^4.18.1",
-    "ffcreator": "^6.7.5"
+    "ffcreator": "^6.7.5",
+    "video-react": "^0.15.0"
   },
   "devDependencies": {
     "@types/node": "^18.7.15",
