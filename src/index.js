@@ -24,7 +24,7 @@ app.get("/video/get", (req, res) => {
     // const videoUrl = req.query.url.toString();
     // let filePath = path.join(__dirname, "https://files.cnblogs.com/MolbyHome/想法.rar");
     // res.download(filePath)
-    const file = fs.createWriteStream("/Users/bzw/Movies/111.mp4");
+    // const file = fs.createWriteStream("/Users/bzw/Movies/111.mp4");
     // res.pipe(file)
     res.download("/www/wwwroot/video/forDownload");
     // downloadFile(videoUrl,res).then(r => {
