@@ -8,7 +8,7 @@ const canvasHeight = 640;
 const totalTime = 16;
 
 exports.createVideo = (callback, imgUrl) => {
-    const videoName = "video_"+Date.parse(new Date().toString()).toString() + Math.floor(Math.random() * 99999999);
+    const videoName = "video_"+Date.parse(new Date().toString()).toString() + Math.floor(Math.random() * 99999999)+".mp4";
     console.log(videoName)
     const imgArray = [
         {path: imgUrl, eff: "zoomingIn", x: 180, y: 320, w: canvasWidth, h: 200},
@@ -55,7 +55,7 @@ exports.createVideo = (callback, imgUrl) => {
     scene.addChild(text);
 
     // creator.output(path.join(__dirname, "output/" + videoName + ".mp4"));
-    creator.output("/www/wwwroot/video/" + videoName + ".mp4");
+    creator.output("/www/wwwroot/video/" + videoName);
     creator.start().then(() => {
         console.log("开始")
     });        // 开始加工
