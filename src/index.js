@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const {createVideo} = require("./VideoGenerator");
 const {uploadingFile, uploadFile, downloadFile} = require("./FTPUtils");
+const fs = require("fs");
 const app = express();
 
 app.get("/video/create", (req, res) => {
@@ -20,9 +21,12 @@ app.get("/video/create", (req, res) => {
     }, imgUrl)
 });
 app.get("/video/get", (req, res) => {
-    const videoUrl = req.query.url.toString();
-        let filePath = path.join(__dirname, "/www/wwwroot/video/" + videoUrl);
-        res.download(filePath)
+    // const videoUrl = req.query.url.toString();
+    // let filePath = path.join(__dirname, "https://files.cnblogs.com/MolbyHome/想法.rar");
+    // res.download(filePath)
+    const file = fs.createWriteStream("/Users/bzw/Movies/111.mp4");
+    // res.pipe(file)
+    res.download("/www/wwwroot/video/forDownload");
     // downloadFile(videoUrl,res).then(r => {
     //     console.log(r)
     //     res.download(filePath);
