@@ -7,8 +7,9 @@ const app = express();
 
 app.get("/video/create", (req, res) => {
     const imgUrl = req.query.url
-    createVideo((filePathCallback) => {
-        console.log("createVideo.callback:" + filePathCallback)
+    createVideo((fileName) => {
+        res.send(fileName)
+        console.log("createVideo.callback:" + fileName)
         // let filePath = path.join(__dirname, "output/" + filePathCallback + ".mp4");
         // console.log('开始上传...');
         // uploadFile(filePath, "video_" + filePathCallback + ".mp4").then(() => {
@@ -21,19 +22,8 @@ app.get("/video/create", (req, res) => {
     }, imgUrl)
 });
 app.get("/video/get", (req, res) => {
-    // const videoUrl = req.query.url.toString();
-    // let filePath = path.join(__dirname, "https://files.cnblogs.com/MolbyHome/想法.rar");
-    // res.download(filePath)
-    // const file = fs.createWriteStream("/Users/bzw/Movies/111.mp4");
-    // res.pipe(file)
-    res.download("/www/wwwroot/video/forDownload");
-    // downloadFile(videoUrl,res).then(r => {
-    //     console.log(r)
-    //     res.download(filePath);
-    // }).catch(err=>{
-    //     console.log(err)
-    //     res.send("下载失败:"+err+new Date().getTime().toString())
-    // });
+    const fileName = req.query.fileName;
+    res.download("/www/wwwroot/video/" + fileName);
 });
 
 app.listen("3000", () => {
