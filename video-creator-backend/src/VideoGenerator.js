@@ -7,7 +7,7 @@ const canvasWidth = 360;
 const canvasHeight = 640;
 const totalTime = 16;
 
-exports.createVideo = (callback, imgUrl) => {
+exports.createVideo = (imgUrl,callback) => {
     const videoName = "video_"+Date.parse(new Date().toString()).toString() + Math.floor(Math.random() * 99999999)+".mp4";
     console.log(videoName)
     const imgArray = [

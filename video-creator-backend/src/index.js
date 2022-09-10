@@ -7,7 +7,7 @@ const app = express();
 
 app.get("/video/create", (req, res) => {
     const imgUrl = req.query.url
-    createVideo((fileName) => {
+    createVideo(imgUrl,(fileName) => {
         res.send(fileName)
         console.log("createVideo.callback:" + fileName)
         // let filePath = path.join(__dirname, "output/" + filePathCallback + ".mp4");
@@ -19,7 +19,7 @@ app.get("/video/create", (req, res) => {
         //     console.log("上传错误:" + err);
         //     res.send("上传失败")
         // })
-    }, imgUrl)
+    })
 });
 app.get("/video/get", (req, res) => {
     const fileName = req.query.fileName;
