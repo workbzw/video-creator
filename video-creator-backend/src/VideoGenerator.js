@@ -7,7 +7,7 @@ const canvasWidth = 360;
 const canvasHeight = 640;
 const totalTime = 16;
 
-exports.createVideo = (imgUrl,callback) => {
+exports.createVideo = (audioPath,imgUrl,callback) => {
     const videoName = "video_"+Date.parse(new Date().toString()).toString() + Math.floor(Math.random() * 99999999)+".mp4";
     console.log(videoName)
     const imgArray = [
@@ -42,6 +42,7 @@ exports.createVideo = (imgUrl,callback) => {
         image.addEffect("rotateIn", i === 0 ? 0 : 1, i * everyOneTime);
         image.addEffect("fadeOut", 1, (i + 1) * everyOneTime);
         scene.addChild(image);
+        scene.addAudio({path:path.join(__dirname, "../"+audioPath)})
     }
 
     const text = new FFText({

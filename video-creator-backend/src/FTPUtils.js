@@ -25,7 +25,6 @@ ftp.connect({
     keepalive: 1000 * 10, // 多久发送一次请求，以保持连接
 });
 
-
 // 正在获取本地文件
 function readingFile() {
     return new Promise((resolve, reject) => {
@@ -33,7 +32,7 @@ function readingFile() {
         // 判断是否读取完毕（1s内 localFiles长度不再变化）
         console.log('正在读取本地文件，请稍后...');
         let timer = setInterval(() => {
-            if (localFileLength == localFiles.length) {
+            if (localFileLength === localFiles.length) {
                 clearInterval(timer);
                 resolve();
                 return console.log('读取完成');
