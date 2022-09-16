@@ -56,7 +56,7 @@ exports.createVideo = (audioPath,imgUrl,callback) => {
     scene.addChild(text);
 
     // creator.output(path.join(__dirname, "output/" + videoName + ".mp4"));
-    creator.output("/www/wwwroot/video/" + videoName);
+    creator.output("/www/wwwroot/video_create/" + videoName);
     creator.start().then(() => {
         console.log("开始")
     });        // 开始加工

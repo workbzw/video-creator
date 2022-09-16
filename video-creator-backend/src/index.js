@@ -16,7 +16,7 @@ app.get("/video/create", (req, res) => {
 
 app.get("/video/get", (req, res) => {
     const fileName = req.query.fileName;
-    res.download("/www/wwwroot/video/" + fileName);
+    res.download("/www/wwwroot/video_create/" + fileName);
 });
 
 app.listen("3001", () => {
