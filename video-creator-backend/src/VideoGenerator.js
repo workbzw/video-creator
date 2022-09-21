@@ -35,8 +35,8 @@ exports.createVideo = (audioPath, imgArray, callback) => {
     text.setBackgroundColor("#000000");
     text.addEffect("fadeIn", 1, 1);
     scene.addChild(text);
-    creator.output(path.join(__dirname, "output/" + videoName + ".mp4"));
-    // creator.output("/www/wwwroot/video_create/" + videoName);
+    // creator.output(path.join(__dirname, "output/" + videoName));
+    creator.output("/www/wwwroot/video_create/" + videoName);
     creator.start().then(() => {
         console.log("开始")
     });        // 开始加工

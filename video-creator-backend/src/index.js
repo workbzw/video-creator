@@ -28,8 +28,8 @@ app.post('/api/v1/upload', (req, res) => {
         let fName = fileInfo.filename;
         fileNameResult = randomName + fName;
         console.log(fileNameResult)
-        // file.pipe(fs.createWriteStream(`/www/wwwroot/video_create/${fileNameResult}`));
-        file.pipe(fs.createWriteStream(`/Users/bzw/workspace/web/video-creator/video-creator-backend/upload/${fileNameResult}`));
+        file.pipe(fs.createWriteStream(`/www/wwwroot/video_create/${fileNameResult}`));
+        // file.pipe(fs.createWriteStream(`/Users/bzw/workspace/web/video-creator/video-creator-backend/src/output/${fileNameResult}`));
     });
 
     busboy.on('finish', function () {
@@ -65,8 +65,8 @@ app.post("/api/v1/video/create", (req, res) => {
 
 app.get("/api/v1/file/:fileName", (req, res) => {
     const fName = req.params.fileName
-    // res.download("/www/wwwroot/video_create/" + fileName);
-    res.download("./upload/" + fName);
+    res.download("/www/wwwroot/video_create/" + fName);
+    // res.download("./src/output/" + fName);
 });
 
 app.listen('3001', () => {

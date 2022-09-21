@@ -11,7 +11,7 @@ const args = process.argv.slice(2)
 //const Memwatch = require("node-memwatch-new")
 
 const URL = "wss://nls-gateway.cn-shanghai.aliyuncs.com/ws/v1"
-      //获取Appkey请前往控制台：https://nls-portal.console.aliyun.com/applist
+//获取Appkey请前往控制台：https://nls-portal.console.aliyun.com/applist
 const TOKEN = "Your Token"      //获取Token具体操作，请参见：https://help.aliyun.com/document_detail/450514.html
 
 let b1 = []
@@ -19,8 +19,8 @@ let loadIndex = 0
 //let hd = new Memwatch.HeapDiff()
 let needDump = true
 
-async function runOnce(token,appKey, line, callback) {
-    console.log(`speak: ${line}`)
+async function runOnce(token, appKey, str, callback) {
+    console.log(`speak: ${str}`)
     loadIndex++
     const fileName = "voice_" + random() + ".mp3"
     let dumpFile = fs.createWriteStream(fileName, {flags: "w"})
@@ -45,7 +45,7 @@ async function runOnce(token,appKey, line, callback) {
         console.log("Client recv failed:", msg)
     })
     let param = tts.defaultStartParams()
-    param.text = line
+    param.text = str
     param.voice = "Rosa"
     try {
         await tts.start(param, true, 6000)
@@ -59,9 +59,9 @@ async function runOnce(token,appKey, line, callback) {
     await sleep(2000)
 }
 
-exports.textToVoice = (str,appKey,id,secret,callback) => {
-    requestToken(id,secret,(token) => {
-        runOnce(token, str, (fileName) => {
+exports.textToVoice = (str, appKey, id, secret, callback) => {
+    requestToken(id, secret, (token) => {
+        runOnce(token, appKey, str, (fileName) => {
             console.log("fileName:" + fileName)
             callback(fileName)
         }).then(r => {
