@@ -11,7 +11,7 @@ const args = process.argv.slice(2)
 //const Memwatch = require("node-memwatch-new")
 
 const URL = "wss://nls-gateway.cn-shanghai.aliyuncs.com/ws/v1"
-const APPKEY = "92V7T8uUg4KyHMjq"      //获取Appkey请前往控制台：https://nls-portal.console.aliyun.com/applist
+      //获取Appkey请前往控制台：https://nls-portal.console.aliyun.com/applist
 const TOKEN = "Your Token"      //获取Token具体操作，请参见：https://help.aliyun.com/document_detail/450514.html
 
 let b1 = []
@@ -19,13 +19,13 @@ let loadIndex = 0
 //let hd = new Memwatch.HeapDiff()
 let needDump = true
 
-async function runOnce(token, line, callback) {
+async function runOnce(token,appKey, line, callback) {
     console.log(`speak: ${line}`)
     loadIndex++
     const fileName = "voice_" + random() + ".mp3"
     let dumpFile = fs.createWriteStream(fileName, {flags: "w"})
     let tts = new Nls.SpeechSynthesizer({
-        url: URL, appkey: APPKEY, token: token
+        url: URL, appkey: appKey, token: token
     })
     tts.on("meta", (msg) => {
         console.log("Client recv metainfo:", msg)
@@ -59,8 +59,8 @@ async function runOnce(token, line, callback) {
     await sleep(2000)
 }
 
-exports.textToVoice = (str,callback) => {
-    requestToken((token) => {
+exports.textToVoice = (str,appKey,id,secret,callback) => {
+    requestToken(id,secret,(token) => {
         runOnce(token, str, (fileName) => {
             console.log("fileName:" + fileName)
             callback(fileName)

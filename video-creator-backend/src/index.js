@@ -1,26 +1,76 @@
 const express = require("express");
 const {createVideo} = require("./VideoGenerator");
 const {textToVoice} = require("./VoiceGenerator");
-const app = express();
+const {random} = require("./Utils");
+const cors = require('cors')
+const Busboy = require('busboy');
+const fs = require("fs");
 
-app.get("/video/create", (req, res) => {
-    const imgUrl = req.query.url
-    let str = "上述视频发布后引发众多网友热议，目前已有近8万点赞，评论数接近5万条。有网友科普道，“基本上所有益生菌都是从人体提取出来的，大部分是粪便。不过不要膈应，因为培养后和粪便完全没丁点关系了。”也有网友表示，“虽然知道没什么，但是感觉过不去心里那道坎。”还有网友则调侃称：“能不能找点瘦子的益生菌。”\n" + "\n" + "极目新闻记者注意到，此前已有网友在网络平台晒出了这款酸奶，产品包装上的醒目位置标注了“中国发明专利菌株”“巴马益生菌”“鼠李糖乳杆菌hsryfm1301”等字样。一位网友在晒出这款酸奶时配文写道：“这个巴马益生菌感觉之前在论文里看到过，是从巴马长寿老人……”"
-    textToVoice(str, (mp3File) => {
-        createVideo(mp3File,imgUrl, (fileName) => {
-            res.send(fileName)
+const app = express();
+app.use(express.urlencoded({extended: true})); // 现在就方便多了，express的两个方法一执行就行啦
+app.use(express.json());
+app.use(cors());
+
+// {
+//     code:200,
+//     msg:{
+//         imgUrl:""
+//     },
+//     state:200
+// }
+
+// 处理上传文件服务
+app.post('/api/v1/upload', (req, res) => {
+    let randomName = random()
+    let fileNameResult = ""
+    const busboy = Busboy({headers: req.headers});
+    busboy.on('file', (fieldName, file, fileInfo, encoding, mimetype) => {
+        let fName = fileInfo.filename;
+        fileNameResult = randomName + fName;
+        console.log(fileNameResult)
+        // file.pipe(fs.createWriteStream(`/www/wwwroot/video_create/${fileNameResult}`));
+        file.pipe(fs.createWriteStream(`/Users/bzw/workspace/web/video-creator/video-creator-backend/upload/${fileNameResult}`));
+    });
+
+    busboy.on('finish', function () {
+        console.log(fileNameResult)
+        res.writeHead(200, {
+            'Content-Type': 'application/json'
+        })
+        let result = {code: 200, msg: "success", data: {fileName: fileNameResult}};
+        res.end(JSON.stringify(result));
+    });
+    return req.pipe(busboy);
+});
+
+app.post("/api/v1/video/create", (req, res) => {
+    console.log(req.body)
+    const appKey = req.body.data.ttsConfig.appKey.toString().trim();
+    const id = req.body.data.ttsConfig.accessKeyId.toString().trim();
+    const secret = req.body.data.ttsConfig.accessKeySecret.toString().trim();
+    const imgUrlList = req.body.data.video.imgUrlList.toString().trim();
+    const str = req.body.data.video.dubbing.toString().trim();
+    console.log('appKey：' + appKey + '，id：' + id + '，secret：' + secret)
+    textToVoice(str, appKey, id, secret, (mp3File) => {
+        createVideo(mp3File, imgUrlList, (fileName) => {
+            res.writeHead(200, {
+                'Content-Type': 'application/json'
+            })
+            let result = {code: 200, msg: "success", data: {fileName: fileName}};
+            res.end(JSON.stringify(result))
             console.log("createVideo.callback:" + fileName)
         })
     })
 });
 
-app.get("/video/get", (req, res) => {
-    const fileName = req.query.fileName;
-    res.download("/www/wwwroot/video_create/" + fileName);
+app.get("/api/v1/file/:fileName", (req, res) => {
+    const fName = req.params.fileName
+    // res.download("/www/wwwroot/video_create/" + fileName);
+    res.download("./upload/" + fName);
 });
 
-app.listen("3001", () => {
-    console.log("=========服务启动成功，端口:3001=========");
+app.listen('3001', () => {
+    console.log("访问地址为:http://%s:%s", 'localhost', '3001');
 });
 // let filePath = path.join(__dirname, "output/" + filePathCallback + ".mp4");
 // console.log('开始上传...');

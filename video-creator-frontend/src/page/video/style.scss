@@ -1,0 +1,17 @@
+.left
+.left {
+  flex: 20;
+  background-color: #fff;
+  overflow-y: auto; //出现垂直滚动条
+}
+
+.center {
+  flex: 60;
+  background-color: #f5f5f5;
+}
+
+.right {
+  flex: 20;
+  background-color: #fff;
+  overflow-y: auto; //出现垂直滚动条
+}
