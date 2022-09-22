@@ -41,6 +41,7 @@ export const GalleryModel = () => {
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
+                'user-agent': 'Example',
                 'Content-Type': 'application/json;charset=utf-8'
             },
             redirect: 'follow', // manual, *follow, error

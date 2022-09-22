@@ -16,9 +16,11 @@ export const ImageUpload = () => {
         multiple: true,
         maxCount: 16,
         accept: 'image/*',
+
         action: 'http://localhost:3001/api/v1/upload',
         headers: {
             authorization: 'authorization-text',
+            XRequestedWith:""
         },
         onChange(info) {
             setFiles([...info.fileList])
