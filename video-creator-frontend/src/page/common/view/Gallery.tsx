@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Carousel, Image} from 'antd';
 import {useSelector} from "react-redux";
 import {RootState} from "../../../store";
