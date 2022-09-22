@@ -30,7 +30,6 @@ export const GalleryModel = () => {
                     }
                 });
             });
-
     }
 
     async function postData(url = '', data = {}) {
