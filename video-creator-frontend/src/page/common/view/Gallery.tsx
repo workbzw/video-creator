@@ -9,7 +9,7 @@ export const Gallery = () => {
         <Carousel autoplay dots={false} style={{margin: 4}}>
             {state.video.imgUrlList.map((imgUrl) => (
                 <div>
-                    <Image preview={false} className={'img'} src={`http://localhost:3001/api/v1/file/${imgUrl}`}/>
+                    <Image preview={false} className={'img'} src={`http://110.42.242.63:3001/api/v1/file/${imgUrl}`}/>
                 </div>
             ))}
         </Carousel>

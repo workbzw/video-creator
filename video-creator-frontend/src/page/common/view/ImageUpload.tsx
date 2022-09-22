@@ -17,7 +17,7 @@ export const ImageUpload = () => {
         maxCount: 16,
         accept: 'image/*',
 
-        action: 'http://localhost:3001/api/v1/upload',
+        action: 'http://110.42.242.63:3001/api/v1/upload',
         headers: {
             authorization: 'authorization-text',
             XRequestedWith:""
