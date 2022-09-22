@@ -4,3 +4,12 @@
   margin: 0 auto;
   overflow: hidden;
 }
+.img{
+  aspect-ratio: 1;
+  color: #ffffff;
+  line-height: 21;
+  overflow: hidden;
+  text-align: center;
+  background: #ffffff;
+  object-fit: cover;
+}
