@@ -13,7 +13,7 @@ exports.createVideo = (audioPath, imgArray, callback) => {
     });
 
     const scene = new FFScene();
-    scene.setBgColor("#ffcc22");
+    scene.setBgColor("#ffffff");
     scene.setDuration(16);
     scene.setTransition("GridFlip", 2);
     creator.addChild(scene);
