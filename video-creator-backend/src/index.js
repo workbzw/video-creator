@@ -49,7 +49,7 @@ app.post("/api/v1/video/create", (req, res) => {
     const appKey = req.body.data.ttsConfig.appKey.toString().trim();
     const id = req.body.data.ttsConfig.accessKeyId.toString().trim();
     const secret = req.body.data.ttsConfig.accessKeySecret.toString().trim();
-    const imgUrlList = req.body.data.video.imgUrlList.toString().trim();
+    const imgUrlList = req.body.data.video.imgUrlList;
     const str = req.body.data.video.dubbing.toString().trim();
     console.log('appKey：' + appKey + '，id：' + id + '，secret：' + secret)
     textToVoice(str, appKey, id, secret, (mp3File) => {
