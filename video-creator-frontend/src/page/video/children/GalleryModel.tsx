@@ -15,7 +15,7 @@ export const GalleryModel = () => {
 
     function handleClick(e: any) {
         setLoading(true)
-        postData('http://localhost:3001/api/v1/video/create', {code: 200, msg: "success", data: store.getState()})
+        postData('http://127.0.0.1:3001/api/v1/video/create', {code: 200, msg: "success", data: store.getState()})
             .then((data) => {
                 console.log(data.data.fileName); // JSON data parsed by `data.json()` call
                 setLoading(false)
@@ -26,7 +26,7 @@ export const GalleryModel = () => {
                     okText: '下载到本地',
                     cancelText: '取消',
                     onOk: () => {
-                        window.location.href = 'http://localhost:3001/api/v1/file/' + data.data.fileName
+                        window.location.href = 'http://127.0.0.1:3001/api/v1/file/' + data.data.fileName
                     }
                 });
             });
