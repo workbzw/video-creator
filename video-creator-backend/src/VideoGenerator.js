@@ -20,8 +20,9 @@ exports.createVideo = (audioPath, imgArray, callback) => {
     const everyOneTime = totalTime / imgArray.length;
     for (let i = 0; i < imgArray.length; i++) {
         let img = imgArray[i];
+        console.log("/www/wwwroot/video_create/" + img)
         const image = new FFImage({
-            path: "/www/wwwroot/video_create/"+img, x: img.x, y: img.y, width: img.w, height: img.h
+            path: "/www/wwwroot/video_create/" + img, x: img.x, y: img.y, width: img.w, height: img.h
         });
         image.addEffect("rotateIn", i === 0 ? 0 : 1, i * everyOneTime);
         image.addEffect("fadeOut", 1, (i + 1) * everyOneTime);
