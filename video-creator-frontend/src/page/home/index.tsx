@@ -1,5 +1,5 @@
 import React from 'react';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import {useNavigate} from "react-router";
 import {BaseRoot} from "../base/BaseRoot";
 import {Button} from 'antd';

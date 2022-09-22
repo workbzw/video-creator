@@ -3,7 +3,7 @@ import type {UploadProps} from 'antd';
 import {message} from "antd";
 import {InboxOutlined} from '@ant-design/icons';
 import {stateActions, store} from "../../../store";
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import './style.scss'
 import Dragger from "antd/es/upload/Dragger";
 
