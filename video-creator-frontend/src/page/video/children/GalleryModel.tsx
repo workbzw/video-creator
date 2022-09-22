@@ -26,7 +26,7 @@ export const GalleryModel = () => {
                     okText: '下载到本地',
                     cancelText: '取消',
                     onOk: () => {
-                        window.location.href = 'http://localhost:3001/api/v1/file/' + data.data.fileName
+                        window.location.href = 'http://110.42.242.63:3001/api/v1/file/' + data.data.fileName
                     }
                 });
             });
