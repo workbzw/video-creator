@@ -28,7 +28,8 @@ exports.createVideo = (audioPath, imgArray, callback) => {
         image.addEffect("fadeOut", 1, (i + 1) * everyOneTime);
         scene.addChild(image);
     }
-    scene.addAudio({path: path.join(__dirname, "../" + audioPath)})
+    // scene.addAudio({path: path.join(__dirname, "../" + audioPath)})
+    scene.addAudio({path: "/www/wwwroot/video_create/" + audioPath})
     const text = new FFText({
         text: "你好", x: 0, y: 0
     });

@@ -23,7 +23,7 @@ async function runOnce(token, appKey, str, callback) {
     console.log(`speak: ${str}`)
     loadIndex++
     const fileName = "voice_" + random() + ".mp3"
-    let dumpFile = fs.createWriteStream(fileName, {flags: "w"})
+    let dumpFile = fs.createWriteStream("/www/wwwroot/video_create/"+fileName, {flags: "w"})
     let tts = new Nls.SpeechSynthesizer({
         url: URL, appkey: appKey, token: token
     })
