@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import './style.scss'
 import {Layout, Menu, MenuProps} from "antd";
-import {Content, Footer, Header} from "antd/es/layout/layout";
 import {GalleryModel} from "./children/GalleryModel";
 import {ChartModel} from "./children/ChartModel";
 
