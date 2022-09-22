@@ -21,6 +21,7 @@ app.use(cors());
 
 // 处理上传文件服务
 app.post('/api/v1/upload', (req, res) => {
+    console.log('/api/v1/upload')
     let randomName = random()
     let fileNameResult = ""
     const busboy = Busboy({headers: req.headers});
@@ -44,7 +45,7 @@ app.post('/api/v1/upload', (req, res) => {
 });
 
 app.post("/api/v1/video/create", (req, res) => {
-    console.log(req.body)
+    console.log('/api/v1/video/create')
     const appKey = req.body.data.ttsConfig.appKey.toString().trim();
     const id = req.body.data.ttsConfig.accessKeyId.toString().trim();
     const secret = req.body.data.ttsConfig.accessKeySecret.toString().trim();
@@ -64,6 +65,7 @@ app.post("/api/v1/video/create", (req, res) => {
 });
 
 app.get("/api/v1/file/:fileName", (req, res) => {
+    console.log('/api/v1/file/:fileName')
     const fName = req.params.fileName
     res.download("/www/wwwroot/video_create/" + fName);
     // res.download("./src/output/" + fName);
