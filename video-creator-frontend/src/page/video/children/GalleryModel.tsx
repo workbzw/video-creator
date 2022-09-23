@@ -14,22 +14,36 @@ export const GalleryModel = () => {
     const [loading, setLoading] = useState(false);
 
     function handleClick(e: any) {
-        setLoading(true)
-        postData('/api/v1/video/create', {code: 200, msg: "success", data: store.getState()})
-            .then((data) => {
-                console.log(data.data.fileName); // JSON data parsed by `data.json()` call
-                setLoading(false)
-                Modal.confirm({
-                    title: '视频合成成功',
-                    icon: <VideoCameraOutlined/>,
-                    content: '请点击下方`下载到本地`',
-                    okText: '下载到本地',
-                    cancelText: '取消',
-                    onOk: () => {
-                        window.location.href = 'http://110.42.242.63:3001/api/v1/file/' + data.data.fileName
-                    }
+        if (!store.getState().video.title
+            || store.getState().video.title === null
+            || store.getState().video.title === ""
+            || !store.getState().video.subTitle
+            || store.getState().video.subTitle === null
+            || store.getState().video.subTitle === ""
+            || !store.getState().video.dubbing
+            || store.getState().video.dubbing === null
+            || store.getState().video.dubbing === ""
+        ) {
+            alert("请填写完整信息")
+        } else {
+            setLoading(true)
+            postData('/api/v1/video/create', {code: 200, msg: "success", data: store.getState()})
+                .then((data) => {
+                    console.log(data.data.fileName); // JSON data parsed by `data.json()` call
+                    setLoading(false)
+                    Modal.confirm({
+                        title: '视频合成成功',
+                        icon: <VideoCameraOutlined/>,
+                        content: '请点击下方`下载到本地`',
+                        okText: '下载到本地',
+                        cancelText: '取消',
+                        onOk: () => {
+                            window.location.href = 'http://110.42.242.63:3001/api/v1/file/' + data.data.fileName
+                        }
+                    });
                 });
-            });
+
+        }
     }
 
     async function postData(url = '', data = {}) {
@@ -65,17 +79,25 @@ export const GalleryModel = () => {
                 <Spin spinning={loading} style={{width: '100%', height: '100%'}}>
                     <div style={{position: 'relative', width: '100%', height: '100%'}}>
                         <div className={'page'}>
-                            <Form className={'form-item'} style={{ paddingRight: 8,marginTop:24}}>
-                                AppKey:<Input maxLength={20} value={state.ttsConfig.appKey}
-                                              onChange={handleInputAppKey}/>
-                            </Form>
-                            <Form className={'form-item'} style={{paddingLeft: 4, paddingRight: 4,marginTop:24}}>
-                                AccessKeyId:<Input maxLength={20} value={state.ttsConfig.accessKeyId}
-                                                   onChange={handleInputAccessKeyId}/>
-                            </Form>
-                            <Form className={'form-item'} style={{paddingLeft: 8,marginTop:24}}>
-                                AccessKeySecret:<Input maxLength={40} value={state.ttsConfig.accessKeySecret}
-                                                       onChange={handleInputAccessKeySecret}/>
+                            <Form className={'page'} layout={'vertical'}>
+                                <Form.Item className={'form-item'} name="AppKey" label="AppKey"
+                                           rules={[{required: true}]}
+                                           style={{paddingRight: 8, marginTop: 24}}>
+                                    <Input maxLength={20} value={state.ttsConfig.appKey}
+                                           onChange={handleInputAppKey}/>
+                                </Form.Item>
+                                <Form.Item className={'form-item'} name="AccessKeyId" label="AccessKeyId"
+                                           rules={[{required: true}]}
+                                           style={{paddingLeft: 4, paddingRight: 4, marginTop: 24}}>
+                                    <Input maxLength={20} value={state.ttsConfig.accessKeyId}
+                                           onChange={handleInputAccessKeyId}/>
+                                </Form.Item>
+                                <Form.Item className={'form-item'} name="AccessKeySecret" label="AccessKeySecret"
+                                           rules={[{required: true}]}
+                                           style={{paddingLeft: 8, marginTop: 24}}>
+                                    <Input maxLength={40} value={state.ttsConfig.accessKeySecret}
+                                           onChange={handleInputAccessKeySecret}/>
+                                </Form.Item>
                             </Form>
                         </div>
                         <Form className={'form-item'}>
@@ -94,7 +116,7 @@ export const GalleryModel = () => {
                                          autoSize={{maxRows: 5, minRows: 5}}
                                          onChange={e => store.dispatch(stateActions.setDubbing(e.target.value.trim().replace(/\s*/g, "")))}/>
                         </Form>
-                        <Button onClick={handleClick} style={{width: '100%', marginTop: 16}}
+                        <Button htmlType="submit" onClick={handleClick} style={{width: '100%', marginTop: 16}}
                                 type={'primary'} shape={'round'}>点击合成</Button>
                     </div>
                 </Spin>
