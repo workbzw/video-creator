@@ -61,52 +61,60 @@ export const GalleryModel = () => {
     }
     return (
         <div className={'page'}>
-            <Spin spinning={loading} style={{width: '100%', height: '100%'}}>
-                <div style={{marginLeft: 12, position: 'relative', overflowY: 'auto', width: 350, height: '100%'}}>
-                    <Form className={'form-item'}>
-                        AppKey:<Input maxLength={20} value={state.ttsConfig.appKey} onChange={handleInputAppKey}/>
-                    </Form>
-                    <Form className={'form-item'}>
-                        AccessKeyId:<Input maxLength={20} value={state.ttsConfig.accessKeyId}
-                                           onChange={handleInputAccessKeyId}/>
-                    </Form>
-                    <Form className={'form-item'}>
-                        AccessKeySecret:<Input maxLength={40} value={state.ttsConfig.accessKeySecret}
-                                               onChange={handleInputAccessKeySecret}/>
-                    </Form>
-                    <Form className={'form-item'}>
-                        标题:<Input maxLength={12} value={state.video.title}
-                                  onChange={e => store.dispatch(stateActions.setTitle(e.target.value.trim().replace(/\s*/g, "")))}/>
-                    </Form>
-                    <Form className={'form-item'}>
-                        图片:<ImageUpload/>
-                    </Form>
-                    <Form className={'form-item'}>
-                        副标题:<Input maxLength={24} value={state.video.subTitle}
-                                   onChange={e => store.dispatch(stateActions.setSubTitle(e.target.value.trim().replace(/\s*/g, "")))}/>
-                    </Form>
-                    <Form className={'form-item'}>
-                        配音:<TextArea maxLength={300} value={state.video.dubbing}
-                                     autoSize={{maxRows: 3, minRows: 2}}
-                                     onChange={e => store.dispatch(stateActions.setDubbing(e.target.value.trim().replace(/\s*/g, "")))}/>
-                    </Form>
-                    <Button onClick={handleClick} style={{width: '100%', marginTop: 6}} type={'primary'}>点击合成</Button>
-                </div>
-            </Spin>
-            <div className={'mobile'}>
-                <div className={'mobile-child-vertical-center'}>
-                    <div className={'child-title'}>
-                        <Row justify="center" align="middle">
-                            <div style={{fontSize: 22, lineHeight: 1}}>{state.video.title}</div>
-                        </Row>
+            <div style={{width: '70%', height: '100%', overflowY: 'auto'}}>
+                <Spin spinning={loading} style={{width: '100%', height: '100%'}}>
+                    <div style={{position: 'relative', width: '100%', height: '100%'}}>
+                        <div className={'page'}>
+                            <Form className={'form-item'} style={{ paddingRight: 8}}>
+                                AppKey:<Input maxLength={20} value={state.ttsConfig.appKey}
+                                              onChange={handleInputAppKey}/>
+                            </Form>
+                            <Form className={'form-item'} style={{paddingLeft: 4, paddingRight: 4}}>
+                                AccessKeyId:<Input maxLength={20} value={state.ttsConfig.accessKeyId}
+                                                   onChange={handleInputAccessKeyId}/>
+                            </Form>
+                            <Form className={'form-item'} style={{paddingLeft: 8}}>
+                                AccessKeySecret:<Input maxLength={40} value={state.ttsConfig.accessKeySecret}
+                                                       onChange={handleInputAccessKeySecret}/>
+                            </Form>
+                        </div>
+                        <Form className={'form-item'}>
+                            标题:<Input maxLength={12} value={state.video.title}
+                                      onChange={e => store.dispatch(stateActions.setTitle(e.target.value.trim().replace(/\s*/g, "")))}/>
+                        </Form>
+                        <Form className={'form-item'}>
+                            图片:<ImageUpload/>
+                        </Form>
+                        <Form className={'form-item'}>
+                            副标题:<Input maxLength={24} value={state.video.subTitle}
+                                       onChange={e => store.dispatch(stateActions.setSubTitle(e.target.value.trim().replace(/\s*/g, "")))}/>
+                        </Form>
+                        <Form className={'form-item'}>
+                            配音:<TextArea maxLength={320} value={state.video.dubbing}
+                                         autoSize={{maxRows: 5, minRows: 5}}
+                                         onChange={e => store.dispatch(stateActions.setDubbing(e.target.value.trim().replace(/\s*/g, "")))}/>
+                        </Form>
+                        <Button onClick={handleClick} style={{width: '100%', marginTop: 6}}
+                                type={'primary'}>点击合成</Button>
                     </div>
-                    <div className={'child-gallery'}>
-                        <Gallery/>
-                    </div>
-                    <div className={'child-subtitle'}>
-                        <Row justify="center" align="middle">
-                            <div style={{fontSize: 18, lineHeight: 1}}>{state.video.subTitle}</div>
-                        </Row>
+                </Spin>
+            </div>
+            <div style={{width: '30%', height: '100%'}}>
+                <div className={'mobile'}>
+                    <div className={'mobile-child-vertical-center'}>
+                        <div className={'child-title'}>
+                            <Row justify="center" align="middle">
+                                <div style={{fontSize: 22, lineHeight: 1}}>{state.video.title}</div>
+                            </Row>
+                        </div>
+                        <div className={'child-gallery'}>
+                            <Gallery/>
+                        </div>
+                        <div className={'child-subtitle'}>
+                            <Row justify="center" align="middle">
+                                <div style={{fontSize: 18, lineHeight: 1}}>{state.video.subTitle}</div>
+                            </Row>
+                        </div>
                     </div>
                 </div>
             </div>
