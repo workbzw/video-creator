@@ -61,19 +61,19 @@ export const GalleryModel = () => {
     }
     return (
         <div className={'page'}>
-            <div style={{width: '70%', height: '100%', overflowY: 'auto'}}>
+            <div style={{width: '50%', height: '100%', overflowY: 'auto'}}>
                 <Spin spinning={loading} style={{width: '100%', height: '100%'}}>
                     <div style={{position: 'relative', width: '100%', height: '100%'}}>
                         <div className={'page'}>
-                            <Form className={'form-item'} style={{ paddingRight: 8}}>
+                            <Form className={'form-item'} style={{ paddingRight: 8,marginTop:24}}>
                                 AppKey:<Input maxLength={20} value={state.ttsConfig.appKey}
                                               onChange={handleInputAppKey}/>
                             </Form>
-                            <Form className={'form-item'} style={{paddingLeft: 4, paddingRight: 4}}>
+                            <Form className={'form-item'} style={{paddingLeft: 4, paddingRight: 4,marginTop:24}}>
                                 AccessKeyId:<Input maxLength={20} value={state.ttsConfig.accessKeyId}
                                                    onChange={handleInputAccessKeyId}/>
                             </Form>
-                            <Form className={'form-item'} style={{paddingLeft: 8}}>
+                            <Form className={'form-item'} style={{paddingLeft: 8,marginTop:24}}>
                                 AccessKeySecret:<Input maxLength={40} value={state.ttsConfig.accessKeySecret}
                                                        onChange={handleInputAccessKeySecret}/>
                             </Form>
@@ -94,12 +94,12 @@ export const GalleryModel = () => {
                                          autoSize={{maxRows: 5, minRows: 5}}
                                          onChange={e => store.dispatch(stateActions.setDubbing(e.target.value.trim().replace(/\s*/g, "")))}/>
                         </Form>
-                        <Button onClick={handleClick} style={{width: '100%', marginTop: 6}}
-                                type={'primary'}>点击合成</Button>
+                        <Button onClick={handleClick} style={{width: '100%', marginTop: 16}}
+                                type={'primary'} shape={'round'}>点击合成</Button>
                     </div>
                 </Spin>
             </div>
-            <div style={{width: '30%', height: '100%'}}>
+            <div style={{width: '50%', height: '100%'}}>
                 <div className={'mobile'}>
                     <div className={'mobile-child-vertical-center'}>
                         <div className={'child-title'}>
