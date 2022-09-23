@@ -78,8 +78,8 @@ export const GalleryModel = () => {
             <div style={{width: '50%', height: '100%', overflowY: 'auto'}}>
                 <Spin spinning={loading} style={{width: '100%', height: '100%'}}>
                     <div style={{position: 'relative', width: '100%', height: '100%'}}>
-                        <div className={'page'}>
-                            <Form className={'page'} layout={'vertical'}>
+                        <div style={{marginBottom:0}}>
+                            <Form className={'page'} layout={'vertical'} style={{marginBottom:0}}>
                                 <Form.Item className={'form-item'} name="AppKey" label="AppKey"
                                            rules={[{required: true}]}
                                            style={{paddingRight: 8, marginTop: 24}}>
@@ -100,23 +100,25 @@ export const GalleryModel = () => {
                                 </Form.Item>
                             </Form>
                         </div>
-                        <Form className={'form-item'}>
-                            标题:<Input maxLength={12} value={state.video.title}
-                                      onChange={e => store.dispatch(stateActions.setTitle(e.target.value.trim().replace(/\s*/g, "")))}/>
-                        </Form>
-                        <Form className={'form-item'}>
-                            图片:<ImageUpload/>
-                        </Form>
-                        <Form className={'form-item'}>
-                            副标题:<Input maxLength={24} value={state.video.subTitle}
+                        <Form  layout={'vertical'}>
+                            <Form.Item name="标题" label="标题" rules={[{required: true}]} style={{marginBottom:5}}>
+                                <Input maxLength={12} value={state.video.title}
+                                       onChange={e => store.dispatch(stateActions.setTitle(e.target.value.trim().replace(/\s*/g, "")))}/>
+                            </Form.Item>
+                            <Form.Item name="图片" label="图片" rules={[{required: true}]} style={{marginBottom:5}}>
+                                <ImageUpload/>
+                            </Form.Item>
+                            <Form.Item name="副标题" label="副标题" rules={[{required: true}]} style={{marginBottom:5}}>
+                                <Input maxLength={24} value={state.video.subTitle}
                                        onChange={e => store.dispatch(stateActions.setSubTitle(e.target.value.trim().replace(/\s*/g, "")))}/>
+                            </Form.Item>
+                            <Form.Item name="配音" label="配音" rules={[{required: true}]} style={{marginBottom:10}}>
+                                <TextArea maxLength={320} value={state.video.dubbing}
+                                          autoSize={{maxRows: 5, minRows: 5}}
+                                          onChange={e => store.dispatch(stateActions.setDubbing(e.target.value.trim().replace(/\s*/g, "")))}/>
+                            </Form.Item>
                         </Form>
-                        <Form className={'form-item'}>
-                            配音:<TextArea maxLength={320} value={state.video.dubbing}
-                                         autoSize={{maxRows: 5, minRows: 5}}
-                                         onChange={e => store.dispatch(stateActions.setDubbing(e.target.value.trim().replace(/\s*/g, "")))}/>
-                        </Form>
-                        <Button htmlType="submit" onClick={handleClick} style={{width: '100%', marginTop: 16}}
+                        <Button htmlType="submit" onClick={handleClick} style={{width: '100%'}}
                                 type={'primary'} shape={'round'}>点击合成</Button>
                     </div>
                 </Spin>
